@@ -27,12 +27,6 @@ public class DBQuery {
         return stmt.executeUpdate();
     }
 
-    public boolean execute(String query, Object... params) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement(query);
-        setParameters(stmt, params);
-        return stmt.execute();
-    }
-
     private void setParameters(PreparedStatement stmt, Object... params) throws SQLException {
         if (params != null) {
             for (int i = 0; i < params.length; i++) {
