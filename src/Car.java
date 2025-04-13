@@ -1,8 +1,8 @@
 public class Car {
 private final String regestration_number;
 private String color;
-    public Car(String regestrationNumber, String color, boolean available) {
-        regestration_number = regestrationNumber;
+    public Car(String regestrationNumber, String color) {
+        this.regestration_number = regestrationNumber;
         this.color = color;
     }
     public String getRegestrationNumber() {

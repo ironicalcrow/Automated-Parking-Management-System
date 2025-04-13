@@ -2,7 +2,7 @@
 import java.sql.*;
 
 public class DBQuery {
-    Connection conn = DBConnection.getConnection();
+    Connection conn;
     private static DBQuery instance;
     private DBQuery() throws SQLException {
         conn = DBConnection.getConnection();

@@ -7,7 +7,6 @@ public class Execution {
     public Execution() throws SQLException {
         DBQuery dbQuery= DBQuery.getInstance();
     }
-
     public void GetCarList() throws SQLException {
         String stmt = "select * from ParkingSlot";
         ResultSet rs = dbQuery.executeSelect(stmt,null);
@@ -34,10 +33,30 @@ public class Execution {
             }
         }
     }
+    public void getSlotdataByColor(String color) throws SQLException {
+        String stmt = "select * from ParkingSlot where color = ?";
+        ResultSet rs = dbQuery.executeSelect(stmt,color);
+        System.out.println("Slot and Registration numbers: ");
+        try {
+            while (rs.next()) {
+                int slotNumber = rs.getInt("SlotNumber");
+                String registrationNumber = rs.getString("reg_num");
+                System.out.println(slotNumber+" "+registrationNumber);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void getSlotListByColor(String color) throws SQLException {
         String stmt = "select * from ParkingSlot where color = ?";
         ResultSet rs = dbQuery.executeSelect(stmt,color);
-        System.out.println("Slot Numbers Are: ");
+        System.out.println("Slot numbers: ");
         try {
             while (rs.next()) {
                 int slotNumber = rs.getInt("SlotNumber");
@@ -52,6 +71,7 @@ public class Execution {
                 e.printStackTrace();
             }
         }
+
 
     }
     public void getCarInfoByRegisterNumber(String registerNumber) throws SQLException {
@@ -102,5 +122,9 @@ public class Execution {
     public void setSlotAsUnavailable(ParkingSlot slot) throws SQLException {
         String sql = "UPDATE ParkingSlot SET available = false, reg_num= ?, color= ? WHERE SlotNumber = ?";
         dbQuery.executeUpdate(sql,slot.getParkedCar().getRegestrationNumber().trim(),slot.getParkedCar().getColor().trim(),slot.getSlotNumber());
+    }
+    public void tableDatadrop() throws SQLException {
+        String stmt = "drop table ParkingSlot";
+        dbQuery.executeUpdate(stmt,null);
     }
 }
