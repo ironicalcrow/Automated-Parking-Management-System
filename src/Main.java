@@ -8,7 +8,9 @@ public class Main {
         System.out.println("Creating Parking lot with ......  slots");
         System.out.println("Enter Number of Slots: ");
         int capacity= sc.nextInt();
+//        System.out.println(capacity);
         ParkingLot parkingLot= new ParkingLot(capacity);
+//        System.out.println("parkign lot created!");
         Console console = new Console();
         boolean flag = true;
         for(int i=0; i<capacity; i++){
